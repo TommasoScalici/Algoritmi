@@ -25,13 +25,50 @@ void insertionSort(int source[], int dim)
 
 void merge(int source[], int left, int center, int right)
 {
-	int i = left;
-	int j = center + 1;
-	int k = 0;
+	int size1 = center - left + 1;
+	int size2 = right - center;
 
-	int arrayTempSize = right - left + 1;
+	int* leftArray = malloc(sizeof(int) * size1);
+	int* rightArray = malloc(sizeof(int) * (right - center));
 
+	for (int i = 0; i < size1; i++)
+		leftArray[i] = source[left + i];
+	for (int j = 0; j < size2; j++)
+		rightArray[j] = source[center + 1 + j];
 
+	int i = 0;
+	int j = 0;
+	int k = left;
+
+	while (i < size1 && j < size2)
+	{
+		if (leftArray[i] <= rightArray[j])
+		{
+			source[k] = leftArray[i];
+			i++;
+		}
+		else
+		{
+			source[k] = rightArray[j];
+			j++;
+		}
+
+		k++;
+	}
+
+	while (i < size1)
+	{
+		source[k] = leftArray[i];
+		i++;
+		k++;
+	}
+
+	while (j < size2)
+	{
+		source[k] = rightArray[j];
+		j++;
+		k++;
+	}
 }
 
 void mergeSort(int source[], int left, int right)
