@@ -1,13 +1,12 @@
 #pragma once
 
-#include <stdio.h>
+#include <stdlib.h>
 
-void bubbleSort(int source[], int dim);
-void heapSort(int source[], int dim);
-void insertionSort(int source[], int dim);
-void merge(int source[], int left, int center, int right);
-void mergeSort(int source[], int left, int right);
-void quickSort(int source[], int dim);
-void selectionSort(int source[], int dim);
+void bubbleSort(int source[], int size);
+void heapSort(int source[], int size);
+void insertionSort(int source[], int size);
+void mergeSort(int source[], int size);
+void quickSort(int source[], int size);
+void selectionSort(int source[], int size);
 
 void swap(int* a, int* b);

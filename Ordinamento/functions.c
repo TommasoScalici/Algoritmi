@@ -1,10 +1,10 @@
 #include "functions.h"
 
-void bubbleSort(int source[], int dim)
+void bubbleSort(int source[], int size)
 {
-	for (size_t i = 0; i < dim; i++)
+	for (size_t i = 0; i < size; i++)
 	{
-		for (size_t j = 0; j < dim - i - 1; j++)
+		for (size_t j = 0; j < size - i - 1; j++)
 		{
 			if (source[j] > source[j + 1])
 				swap(&source[j], &source[j + 1]);
@@ -12,9 +12,9 @@ void bubbleSort(int source[], int dim)
 	}
 }
 
-void insertionSort(int source[], int dim)
+void insertionSort(int source[], int size)
 {
-	for (int i = 0; i < dim - 1 ; i++)
+	for (int i = 0; i < size - 1 ; i++)
 	{
 		for (int j = i; j >= 0 && source[j] > source[j + 1]; j--)
 		{
@@ -28,69 +28,78 @@ void merge(int source[], int left, int center, int right)
 	int size1 = center - left + 1;
 	int size2 = right - center;
 
-	int* leftArray = malloc(sizeof(int) * size1);
-	int* rightArray = malloc(sizeof(int) * size2);
+	int* leftArray = (int*)malloc(sizeof(int) * size1);
+	int* rightArray = (int*)malloc(sizeof(int) * size2);
 
-	for (int i = 0; i < size1; i++)
-		leftArray[i] = source[left + i];
-	for (int j = 0; j < size2; j++)
-		rightArray[j] = source[center + 1 + j];
-
-	int i = 0;
-	int j = 0;
-	int k = left;
-
-	while (i < size1 && j < size2)
+	if (leftArray != NULL && rightArray != NULL)
 	{
-		if (leftArray[i] <= rightArray[j])
+		for (int i = 0; i < size1; i++)
+			leftArray[i] = source[left + i];
+
+		for (int j = 0; j < size2; j++)
+			rightArray[j] = source[center + 1 + j];
+
+		int i = 0;
+		int j = 0;
+		int k = left;
+
+		while (i < size1 && j < size2)
+		{
+			if (leftArray[i] <= rightArray[j])
+			{
+				source[k] = leftArray[i];
+				i++;
+			}
+			else
+			{
+				source[k] = rightArray[j];
+				j++;
+			}
+
+			k++;
+		}
+
+		while (i < size1)
 		{
 			source[k] = leftArray[i];
 			i++;
+			k++;
 		}
-		else
+
+		while (j < size2)
 		{
 			source[k] = rightArray[j];
 			j++;
+			k++;
 		}
-
-		k++;
-	}
-
-	while (i < size1)
-	{
-		source[k] = leftArray[i];
-		i++;
-		k++;
-	}
-
-	while (j < size2)
-	{
-		source[k] = rightArray[j];
-		j++;
-		k++;
 	}
 }
 
-void mergeSort(int source[], int left, int right)
+void mergeSortDivide(int source[], int left, int right)
 {
 	if (left < right)
 	{
 		int center = (left + right) / 2;
-		mergeSort(source, left, center);
-		mergeSort(source, center + 1, right);
+		mergeSortDivide(source, left, center);
+		mergeSortDivide(source, center + 1, right);
 		merge(source, left, center, right);
 	}
 
 	return;
 }
 
-void selectionSort(int source[], int dim)
+void mergeSort(int source[], int size)
 {
-	for (size_t i = 0; i < dim; i++)
-	{
-		int min = i;
+	mergeSortDivide(source, 0, size - 1);
+}
 
-		for (size_t j = i; j < dim; j++)
+void selectionSort(int source[], int size)
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		size_t min = i;
+
+		for (size_t j = i; j < size; j++)
 		{
 			if (source[j] < source[min])
 				min = j;

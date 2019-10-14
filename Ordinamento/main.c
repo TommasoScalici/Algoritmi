@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#include "functions.h"
+
 int main()
 {
 	int arr[] = { 5, 8, 3, 4, 7, 15, 2, 3, 9, 12 };
@@ -8,7 +10,7 @@ int main()
 		printf("%d ", arr[i]);
 
 	printf("\n");
-	mergeSort(arr, 0, 9);
+	mergeSort(arr, 10);
 
 	for (size_t i = 0; i < 10; i++)
 		printf("%d ", arr[i]);
