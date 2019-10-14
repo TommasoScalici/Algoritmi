@@ -29,7 +29,7 @@ void merge(int source[], int left, int center, int right)
 	int size2 = right - center;
 
 	int* leftArray = malloc(sizeof(int) * size1);
-	int* rightArray = malloc(sizeof(int) * (right - center));
+	int* rightArray = malloc(sizeof(int) * size2);
 
 	for (int i = 0; i < size1; i++)
 		leftArray[i] = source[left + i];
