@@ -39,9 +39,7 @@ void merge(int source[], int left, int center, int right)
 		for (int j = 0; j < size2; j++)
 			rightArray[j] = source[center + 1 + j];
 
-		int i = 0;
-		int j = 0;
-		int k = left;
+		int i = 0, j = 0, k = left;
 
 		while (i < size1 && j < size2)
 		{
@@ -93,13 +91,74 @@ void mergeSort(int source[], int size)
 	mergeSortDivide(source, 0, size - 1);
 }
 
+int partition(int source[], int size, int pivot)
+{
+	int i = 0, j = size - 1, pivotValue;
+
+	if (size <= 1)
+		return pivot;
+
+	pivotValue = source[pivot];
+	source[pivot] = source[0];
+
+	for (;;)
+	{
+		while (j > i && source[j] > pivotValue)
+			j--;
+
+		if (j == i)
+			break;
+
+		source[i++] = source[j];
+
+		while (i < j && source[i] < pivotValue)
+			i++;
+
+		if (i == j)
+			break;
+
+		source[j--] = source[i];
+	}
+
+	source[i] = pivotValue;
+	return i;
+}
+
+void quickSort(int source[], int size)
+{
+	int* p = source;
+	int pivot;
+
+	while (size > 1)
+	{
+		pivot = rand() / (RAND_MAX + 1.0) * size;
+
+		if (pivot >= size)
+			pivot = size - 1;
+
+		pivot = partition(p, size, pivot);
+
+		if (pivot > size - pivot - 1)
+		{
+			quickSort(p + (pivot + 1), size - (pivot + 1));
+			size = pivot;
+		}
+		else
+		{
+			quickSort(p, pivot);
+			p += pivot + 1;
+			size -= pivot + 1;
+		}
+	}
+}
+
 void selectionSort(int source[], int size)
 {
-	for (size_t i = 0; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
-		size_t min = i;
+		int min = i;
 
-		for (size_t j = i; j < size; j++)
+		for (int j = i; j < size; j++)
 		{
 			if (source[j] < source[min])
 				min = j;
@@ -110,6 +169,10 @@ void selectionSort(int source[], int size)
 }
 
 
+
+void heapSort(int source[], int size)
+{
+}
 
 void swap(int* a, int* b)
 {

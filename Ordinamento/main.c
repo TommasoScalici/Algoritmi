@@ -10,7 +10,7 @@ int main()
 		printf("%d ", arr[i]);
 
 	printf("\n");
-	mergeSort(arr, 10);
+	quickSort(arr, 10);
 
 	for (size_t i = 0; i < 10; i++)
 		printf("%d ", arr[i]);
