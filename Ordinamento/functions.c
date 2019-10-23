@@ -1,5 +1,15 @@
 #include "functions.h"
 
+typedef struct node
+{
+	int data;
+	struct node* left;
+	struct node* right;
+
+} node;
+
+typedef node* nodePtr;
+
 void bubbleSort(int source[], int size)
 {
 	for (size_t i = 0; i < size; i++)
@@ -10,6 +20,33 @@ void bubbleSort(int source[], int size)
 				swap(&source[j], &source[j + 1]);
 		}
 	}
+}
+
+void heapSort(int source[], int size)
+{
+	nodePtr heap = buildHeap(source, size);
+}
+
+nodePtr insertNode(int data)
+{
+	nodePtr node = (nodePtr)malloc(sizeof(node));
+	node->data = data;
+	node->left = node->right = NULL;
+	return node;
+}
+
+int* buildHeap(nodePtr node, int source[], int i, int size)
+{
+	if (i < size)
+	{
+		nodePtr temp = insertNode(source[i]);
+		node = temp;
+
+		node->left = buildHeap(node->left, source, i * 2 + 1, size);
+		node->right = buildHeap(node->right, source, i * 2 + 2, size);
+	}
+
+	return node;
 }
 
 void insertionSort(int source[], int size)
@@ -131,7 +168,7 @@ void quickSort(int source[], int size)
 
 	while (size > 1)
 	{
-		pivot = rand() / (RAND_MAX + 1.0) * size;
+		pivot = (int)(rand() / (RAND_MAX + 1.0) * size);
 
 		if (pivot >= size)
 			pivot = size - 1;
@@ -168,11 +205,6 @@ void selectionSort(int source[], int size)
 	}
 }
 
-
-
-void heapSort(int source[], int size)
-{
-}
 
 void swap(int* a, int* b)
 {
