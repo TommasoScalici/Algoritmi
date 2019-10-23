@@ -1,15 +1,5 @@
 #include "functions.h"
 
-typedef struct node
-{
-	int data;
-	struct node* left;
-	struct node* right;
-
-} node;
-
-typedef node* nodePtr;
-
 void bubbleSort(int source[], int size)
 {
 	for (size_t i = 0; i < size; i++)
@@ -22,32 +12,36 @@ void bubbleSort(int source[], int size)
 	}
 }
 
+
+void heapify(int source[], int index, int size)
+{
+	int largest = index, leftIndex = 2 * index, rightIndex = 2 * index + 1;
+
+	if (leftIndex < size && source[leftIndex] > source[largest])
+		largest = leftIndex;
+
+	if (rightIndex < size && source[rightIndex] > source[largest])
+		largest = rightIndex;
+
+	if (largest != index)
+	{
+		swap(&source[largest], &source[index]);
+		heapify(source, largest, size);
+	}
+}
+
 void heapSort(int source[], int size)
 {
-	nodePtr heap = buildHeap(source, size);
-}
+	for (int i = size / 2 - 1; i > -1; i--)
+		heapify(source, i, size);
 
-nodePtr insertNode(int data)
-{
-	nodePtr node = (nodePtr)malloc(sizeof(node));
-	node->data = data;
-	node->left = node->right = NULL;
-	return node;
-}
-
-int* buildHeap(nodePtr node, int source[], int i, int size)
-{
-	if (i < size)
+	for (int i = size - 1; i > 0; i--)
 	{
-		nodePtr temp = insertNode(source[i]);
-		node = temp;
-
-		node->left = buildHeap(node->left, source, i * 2 + 1, size);
-		node->right = buildHeap(node->right, source, i * 2 + 2, size);
+		swap(&source[0], &source[i]);
+		heapify(source, 0, i);
 	}
-
-	return node;
 }
+
 
 void insertionSort(int source[], int size)
 {
@@ -71,23 +65,23 @@ void merge(int source[], int left, int center, int right)
 	if (leftArray != NULL && rightArray != NULL)
 	{
 		for (int i = 0; i < size1; i++)
-			leftArray[i] = source[left + i];
+			*(leftArray + i) = source[left + i];
 
 		for (int j = 0; j < size2; j++)
-			rightArray[j] = source[center + 1 + j];
+			*(rightArray + j) = source[center + 1 + j];
 
 		int i = 0, j = 0, k = left;
 
 		while (i < size1 && j < size2)
 		{
-			if (leftArray[i] <= rightArray[j])
+			if (*(leftArray + i) <= *(rightArray + j))
 			{
-				source[k] = leftArray[i];
+				source[k] = *(leftArray + i);
 				i++;
 			}
 			else
 			{
-				source[k] = rightArray[j];
+				source[k] = *(rightArray + j);
 				j++;
 			}
 
@@ -96,14 +90,14 @@ void merge(int source[], int left, int center, int right)
 
 		while (i < size1)
 		{
-			source[k] = leftArray[i];
+			source[k] = *(leftArray + i);
 			i++;
 			k++;
 		}
 
 		while (j < size2)
 		{
-			source[k] = rightArray[j];
+			source[k] = *(rightArray + j);
 			j++;
 			k++;
 		}
@@ -177,13 +171,13 @@ void quickSort(int source[], int size)
 
 		if (pivot > size - pivot - 1)
 		{
-			quickSort(p + (pivot + 1), size - (pivot + 1));
+			quickSort(&p[pivot + 1], size - (pivot + 1));
 			size = pivot;
 		}
 		else
 		{
 			quickSort(p, pivot);
-			p += pivot + 1;
+			p = &p[pivot + 1];
 			size -= pivot + 1;
 		}
 	}
