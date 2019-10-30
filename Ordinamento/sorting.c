@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "sorting.h"
 
 void bubbleSort(int source[], int size)
 {

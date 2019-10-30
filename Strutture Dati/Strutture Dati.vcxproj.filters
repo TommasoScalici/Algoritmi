@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ds.h">
+      <Filter>File di origine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ds.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="sorting.c">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="sorting.h">
-      <Filter>File di origine</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
