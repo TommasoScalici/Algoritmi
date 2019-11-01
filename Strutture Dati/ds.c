@@ -26,7 +26,7 @@ graph* createGraph(int nVertices)
 
 	if(g->adjancyLists != NULL)
 		for (int i = 0; i < nVertices; i++)
-			(*((g->adjancyLists) + i)).head = NULL;
+			((g->adjancyLists) + i)->head = NULL;
 
 	return g;
 }

@@ -14,7 +14,7 @@ typedef struct list
 typedef struct graph
 {
 	int numberOfVertices;
-	struct list* adjancyLists;
+	list* adjancyLists;
 } graph;
 
 

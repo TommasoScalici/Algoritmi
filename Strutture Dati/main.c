@@ -17,10 +17,14 @@ int main()
 	addEdge(g, 2, 3);
 	addEdge(g, 3, 4);
 
-	// print the adjacency list representation of the above graph 
 	printGraph(g);
 
 	return 0;
+}
+
+void dfsVisit(graph* g)
+{
+
 }
 
 void printGraph(graph* g)
