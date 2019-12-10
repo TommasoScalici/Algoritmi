@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LargestContiguousSubsequenceSum.c" />
     <ClCompile Include="LongestIdenticalSubsequence.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>

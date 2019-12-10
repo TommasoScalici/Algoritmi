@@ -24,6 +24,7 @@ int main()
 
 	printf("--- Esercizi di Algoritmi ---\n\n"
 		   "1) Longest Identical Subsequence\n"
+		   "2) Largest Contiguous Subsequence Sum\n"
 		   "0) Esci dal programma\n\n");
 
 	do
@@ -40,13 +41,32 @@ int main()
 			int* arr = NULL;
 			int size = 0;
 			getArray(&arr, &size);
-			printArray(arr, size);
+			//printArray(arr, size);
 			time = clock();
 			printf("La sotto-sequenza identica più lunga ha lunghezza: %d\n", longestIdenticalSubsequenceLength(arr, size));
 			double timeElapsed = ((double)clock() - time) / CLOCKS_PER_SEC;
 			printf("Tempo impiegato per l'elaborazione: %f\n\n", timeElapsed);
 			break;
 		}
+		case 2:
+		{
+			int* arr = NULL;
+			int size = 0;
+			getArray(&arr, &size);
+			//printArray(arr, size);
+			double timeElapsed;
+
+			time = clock();			
+			printf("Il valore della sotto-sequenza contigua di valore massimo è: %d (calcolato ricorsivamente)\n", maxSubsequenceSum(arr, 0, size - 1));
+			timeElapsed = ((double)clock() - time) / CLOCKS_PER_SEC;
+			printf("Tempo impiegato per l'elaborazione: %f\n\n", timeElapsed);
+
+			time = clock();
+			printf("Il valore della sotto-sequenza contigua di valore massimo è: %d (calcolato NON ricorsivamente)\n", maxSubSequenceSumNR(arr, size));
+			timeElapsed = ((double)clock() - time) / CLOCKS_PER_SEC;
+			printf("Tempo impiegato per l'elaborazione: %f\n\n", timeElapsed);
+		}
+			break;
 		default:
 			printf("Scelta non valida.\n\n");
 			rewind(stdin);
@@ -90,8 +110,10 @@ void getArray(int** arr, int* size)
 
 	if (choice == 2)
 	{
+		srand((unsigned int)time(NULL));
+
 		for (int i = 0; i < *size; i++)
-			temp[i] = rand() % 100 + 1;
+			temp[i] = rand() % 200 - 100;
 	}
 
 	*arr = temp;
