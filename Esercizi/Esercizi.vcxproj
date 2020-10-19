@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Tommaso\source\repos\Algoritmi\Strutture Dati;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,12 +124,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="2015-06-24.c" />
     <ClCompile Include="LargestContiguousSubsequenceSum.c" />
     <ClCompile Include="LongestIdenticalSubsequence.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="library.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ordinamento\Ordinamento.vcxproj">
+      <Project>{784cc822-03c5-4dbd-a003-865d7a75fcdc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Strutture Dati\Strutture Dati.vcxproj">
+      <Project>{107f431a-9ddd-44d5-ba51-56f42022065e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

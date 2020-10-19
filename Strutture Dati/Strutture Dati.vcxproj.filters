@@ -15,16 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ds.h">
+    <ClCompile Include="datastructures.c">
       <Filter>File di origine</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ds.c">
+    <ClInclude Include="datastructures.h">
       <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>File di origine</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
 </Project>
